@@ -1,0 +1,50 @@
+<bb-card>
+  <bb-card-body>
+    <div>
+      <div class="row">
+        <div class="col-3">
+          <bb-text-field label="Código" size="regular">
+            <input
+              type="number"
+              id="codigo-input"
+              data-maxlength="8"
+              (keyup)="validaCodigo()"
+              (keydown.-)="$event.preventDefault()"
+              oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+              bbInputRef
+              [(ngModel)]="filtros.codigo"
+            />
+          </bb-text-field>
+        </div>
+        <div class="col-10">
+          <bb-text-field label="Nome" size="regular">
+            <input
+              id="nome-input"
+              maxlength="30"
+              bbInputRef
+              [(ngModel)]="filtros.nome"
+            />
+          </bb-text-field>
+        </div>
+        <div class="col-3">
+          <bb-select-field
+            [(ngModel)]="filtros.situacao"
+            label="Situação"
+            size="regular"
+          >
+            <bb-option *ngFor="let opcao of situacoes" [value]="opcao.value">
+              {{ opcao.label }}</bb-option
+            >
+          </bb-select-field>
+        </div>
+      </div>
+    </div>
+  </bb-card-body>
+  <bb-card-footer>
+    <button bbButton kind="secondary" (click)="limpaFiltros()">Limpar</button>
+    <button bbButton kind="primary" (click)="consultaBandeiras()">
+      Consultar
+    </button>
+  </bb-card-footer>
+</bb-card>

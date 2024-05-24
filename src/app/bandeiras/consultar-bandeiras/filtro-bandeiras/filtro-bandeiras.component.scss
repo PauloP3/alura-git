@@ -1,0 +1,22 @@
+.p-field > * {
+  display: block;
+  width: 100%;
+}
+
+:host ::ng-deep .p-card-content {
+  padding: 0;
+}
+
+:host ::ng-deep .p-card-footer {
+  padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+:host ::ng-deep .bb-dropdown .p-component {
+  width: 100%;
+}
+
+:host ::ng-deep .bb-dropdown .p-checkbox {
+  width: 8%;
+}

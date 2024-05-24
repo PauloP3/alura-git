@@ -1,0 +1,101 @@
+<form [formGroup]="formulario">
+  <bb-card
+    *ngIf="abaAtual === ABA_TABS.ABA_TAB_INSERIR || ABA_TABS.ABA_TAB_ALTERAR"
+  >
+    <bb-card-body>
+      <div class="d-flex flex-row">
+        <div class="first-col col-3">
+          <bb-text-field label="Código" [disabled]="this.alterar">
+            <input
+              type="number"
+              id="codigo"
+              #campoCodigo
+              data-maxlength="6"
+              (keyup)="validaCodigo(campoCodigo.value)"
+              (keydown.-)="$event.preventDefault()"
+              oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+              [formControlName]="CODIGO"
+              bbInputRef
+            />
+            <bb-error
+              *ngIf="(codigo.touched || codigo.dirty) && codigo.invalid"
+            >
+              {{ CAMPO_OBRIGATORIO }}
+            </bb-error>
+          </bb-text-field>
+        </div>
+        <div class="col-13">
+          <pcb-inserir-arquivos
+            [alterar]="alterar"
+            [codigoArquivoOrigin]="codigoArquivoOrigin"
+            (arquivoStatus)="onArquivoStatus($event)"
+          ></pcb-inserir-arquivos>
+        </div>
+      </div>
+      <div class="d-flex flex-row">
+        <div class="first-col col-13">
+          <bb-text-field label="Nome">
+            <input
+              id="nome"
+              data-maxlength="30"
+              oninput="this.value=this.value.slice(0,this.dataset.maxlength)"
+              required
+              [formControlName]="NOME"
+              (ngModelChange)="onAlteraNome()"
+              bbInputRef
+            />
+            <bb-error *ngIf="nome.touched && nome.invalid">
+              {{ CAMPO_OBRIGATORIO }}
+            </bb-error>
+            <bb-error *ngIf="nome.dirty && nomeCadastrado">
+              {{ NOME_JA_CADASTRADO }}
+            </bb-error>
+          </bb-text-field>
+        </div>
+        <div class="situacao">
+          <bb-radio-button-group
+            label="Situação"
+            type="no-border"
+            [inline]="true"
+            [formControlName]="SITUACAO"
+            (ngModelChange)="checarAlteracao()"
+            required
+          >
+            <bb-radio-button [value]="ATIVO" label="Ativo"></bb-radio-button>
+            <bb-radio-button
+              [value]="INATIVO"
+              label="Inativo"
+            ></bb-radio-button>
+          </bb-radio-button-group>
+        </div>
+      </div>
+    </bb-card-body>
+    <bb-card-footer>
+      <button
+        bbButton
+        size="regular"
+        kind="secondary"
+        style="min-width: 100px"
+        (click)="cancela()"
+      >
+        CANCELAR
+      </button>
+      <button
+        bbButton
+        size="regular"
+        kind="primary"
+        style="min-width: 100px"
+        [disabled]="
+          this.formulario.invalid ||
+          !arquivoValido ||
+          !alterado ||
+          campoCodigo.value[0] === '0'
+        "
+        (click)="salva()"
+      >
+        SALVAR
+      </button>
+    </bb-card-footer>
+  </bb-card>
+</form>

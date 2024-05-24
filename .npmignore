@@ -1,0 +1,8 @@
+node_modules
+*.log
+*.tgz
+.sonar
+.scannerwork
+spec
+coverage
+.angular

@@ -1,0 +1,104 @@
+<h1 class="bb-header-large">
+  <button bbIconButton size="regular" (click)="fecharLog()">
+    <bb-icon size="regular" pack="bbds-ui" icon="back"></bb-icon>
+  </button>
+  Log
+</h1>
+<bb-card>
+  <bb-card-body>
+    <p id="desc-tabela" hidden>Log da Bandeira</p>
+    <table
+      bb-table
+      bbSort
+      (bbSortChange)="onSortChange($event)"
+      [dataSource]="dataSource"
+      mode="compact"
+      aria-describedby="desc-tabela"
+    >
+      <ng-container bbColumnDef="dataCadastro">
+        <th
+          bbHeaderCell
+          bb-sort-header
+          *bbHeaderCellDef
+          style="width: 30%"
+          scope="col"
+        >
+          DATA
+        </th>
+        <td bbCell *bbCellDef="let element">
+          {{ element.dataHora | date : "dd/MM/yyyy - HH:mm" }}
+        </td>
+      </ng-container>
+
+      <ng-container bbColumnDef="codigoUsuario">
+        <th
+          bbHeaderCell
+          bb-sort-header
+          *bbHeaderCellDef
+          style="width: 35%"
+          scope="col"
+        >
+          RESPONSÁVEL
+        </th>
+        <td bbCell *bbCellDef="let element">
+          {{ element.usuarioResponsavel }}
+        </td>
+      </ng-container>
+
+      <ng-container bbColumnDef="acao">
+        <th
+          bbHeaderCell
+          bb-sort-header
+          *bbHeaderCellDef
+          style="width: 33%"
+          scope="col"
+        >
+          AÇÃO REALIZADA
+        </th>
+        <td bbCell *bbCellDef="let element">
+          <bb-tag
+            class="pcb-tag"
+            [icon]="{ icon: 'bullet', pack: 'bbds-ui' }"
+            [status]="
+              element.tipoRegistro === 'ALTERACAO' ? 'warning' : 'default'
+            "
+            [light]="true"
+            [label]="formataAcaoLog(element.tipoRegistro)"
+          >
+          </bb-tag>
+        </td>
+      </ng-container>
+
+      <ng-container bbColumnDef="-">
+        <th bbHeaderCell *bbHeaderCellDef style="width: 2%" scope="col"></th>
+        <td bbCell bbHeaderCellAction *bbCellDef="let element">
+          <button bbIconButton size="regular" (click)="abreDetalhe(element)">
+            <bb-icon
+              pack="bbds-ui"
+              class="pcb-seta"
+              icon="chevron-large-right"
+            ></bb-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <thead>
+        <tr bb-header-row *bbHeaderRowDef="colunas"></tr>
+      </thead>
+
+      <tbody>
+        <tr bb-row *bbRowDef="let row; columns: colunas"></tr>
+      </tbody>
+    </table>
+
+    <bb-paginator
+      #bbPaginatorTable
+      [pageIndex]="paginacao.pageIndex"
+      [length]="paginacao.totalRegistros"
+      [pageSizeOptions]="[10, 20, 30, 50, 100]"
+      [pageSize]="paginacao.pageSize"
+      type="personalized"
+      (page)="onPageChange($event)"
+    ></bb-paginator>
+  </bb-card-body>
+</bb-card>

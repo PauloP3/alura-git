@@ -1,0 +1,35 @@
+<!--
+Para iniciar a aplicação na área transacional da Plataforma através do console JavaScript, insira o seguinte comando no navegador (F12 -> console):
+
+iniciarAplicacaoNaAreaTransacional({
+  "nome"       : "pcb-embossing-controle-bandeira",
+  "urlInicial" : "/estatico/pcb-embossing-controle-bandeira/"
+});
+
+Para demais orientações consulte o arquivo README.md na raiz do projeto.
+-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>pcb-embossing-controle-bandeira</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!-- prettier-ignore -->
+    <link id="gaw-theme" rel="stylesheet" href="" />
+    <!-- prettier-ignore -->
+    <link rel="stylesheet" href="/estatico/dls-cdn/fonts/styles/banco-do-brasil.css" />
+    <link rel="stylesheet" href="/estatico/dls-cdn/icons/styles/all.css" />
+    <script>
+      var PltConfig = {
+        APIPath: "pcb-bandeiras/v1",
+        staticPath: "/pcb-embossing-controle-bandeira",
+      };
+    </script>
+  </head>
+  <body>
+    <pcb-app-root> </pcb-app-root>
+  </body>
+</html>
