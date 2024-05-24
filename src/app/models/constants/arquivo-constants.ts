@@ -1,6 +1,0 @@
-export const ARQUIVO_CONSTS = {
-  MAX_FILE_SIZE: 1048576,
-  NUMERO_TIPO_ARQUIVO: 12,
-  EXTENCOES_PERMITIDAS: 'png,jpg,jpeg',
-  ARQUIVO_DESCRICAO: 'Imagem de bandeira',
-};

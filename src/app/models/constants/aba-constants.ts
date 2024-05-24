@@ -1,5 +1,0 @@
-export const ABA_TABS = {
-  ABA_TAB_CONSULTAR: 0,
-  ABA_TAB_INSERIR: 1,
-  ABA_TAB_ALTERAR: 2,
-};
